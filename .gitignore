@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# Ignore CLion-specific build directories
+.idea/
+cmake-build-*/
+/src/cmake-build-debug/
