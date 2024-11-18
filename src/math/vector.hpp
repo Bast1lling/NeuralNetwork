@@ -44,8 +44,15 @@ namespace math {
 
         Vector operator/(const float &other) const;
 
+        Vector exp() const;
+
+        Vector inv(float other = 1) const;
+
         // relational operators
         bool operator==(const Vector &other) const;
+
+        // conversions
+        explicit operator std::vector<float>() const;
 
         // other
         void print() const;

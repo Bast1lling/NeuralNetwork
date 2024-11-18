@@ -1,5 +1,6 @@
 #include "vector.hpp"
 #include <cassert>
+#include <cmath>
 #include <print>
 
 namespace math {
@@ -110,6 +111,22 @@ namespace math {
         return Vector(new_data);
     }
 
+    Vector Vector::exp() const {
+        std::vector<float> new_data = std::vector<float>(_size);
+        for (size_t i = 0; i < _size; i++) {
+            new_data[i] = std::exp(_data[i]);
+        }
+        return Vector(new_data);
+    }
+
+    Vector Vector::inv(const float other) const {
+        std::vector<float> new_data = std::vector<float>(_size);
+        for (size_t i = 0; i < _size; i++) {
+            new_data[i] = other / _data[i];
+        }
+        return Vector(new_data);
+    }
+
     bool Vector::operator==(const Vector &other) const {
         assert(_size == other._size && "Comparing vectors of different size.");
         for (size_t i = 0; i < _size; i++) {
@@ -118,6 +135,10 @@ namespace math {
             }
         }
         return true;
+    }
+
+    Vector::operator std::vector<float>() const {
+        return _data;
     }
 
     void Vector::print() const {

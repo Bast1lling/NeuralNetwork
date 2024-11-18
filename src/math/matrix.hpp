@@ -12,6 +12,10 @@ namespace math {
 
     public:
         // constructors
+        Matrix(std::initializer_list<std::initializer_list<float>> data);
+
+        explicit Matrix(const std::vector<std::vector<float>>& data);
+
         Matrix(size_t n, size_t m);
 
         Matrix(size_t n, size_t m, float value);
@@ -20,9 +24,14 @@ namespace math {
 
         Matrix(const std::vector<Vector> &rows, const std::vector<Vector> &cols);
 
-        // array operations
+        // getter
         std::tuple<size_t, size_t> shape() const;
 
+        size_t n() const;
+
+        size_t m() const;
+
+        // array operations
         const Vector &operator[](size_t index) const;
 
         Vector &operator[](size_t index);
@@ -51,6 +60,12 @@ namespace math {
         Matrix operator*(const float &other) const;
 
         Matrix operator/(const float &other) const;
+
+        Matrix exp() const;
+
+        Matrix inv(float other = 1);
+
+        Matrix had(const Matrix &other) const; // hadamard-product
 
         Matrix T() const;
 

@@ -1,8 +1,37 @@
 #include "matrix.hpp"
 #include <cassert>
 #include <print>
-
+namespace {
+    std::vector<std::vector<float>> convertToVector(
+        const std::initializer_list<std::initializer_list<float>> init) {
+        std::vector<std::vector<float>> result;
+        for (const auto& row : init) {
+            result.emplace_back(row); // Construct vector<float> from initializer_list<float>
+        }
+        return result;
+    }
+} // namespace
 namespace math {
+    Matrix::Matrix(const std::initializer_list<std::initializer_list<float>> data) : Matrix(convertToVector(data)) {
+    }
+
+    Matrix::Matrix(const std::vector<std::vector<float>>& data) : _n(data.size()), _m(data[0].size()) {
+        _rows = std::vector<Vector>(_n);
+        _cols = std::vector<Vector>(_m);
+
+        for (size_t i = 0; i < _n; i++) {
+            _rows[i] = Vector(data[i]);
+        }
+
+        for (size_t i = 0; i < _m; i++) {
+            std::vector<float> col = std::vector<float>(_n);
+            for (size_t j = 0; j < _n; j++) {
+                col[j] = _rows[j][i];
+            }
+            _cols[i] = Vector(col);
+        }
+    }
+
     Matrix::Matrix(const size_t n, const size_t m) : _n(n), _m(m) {
         _rows = std::vector<Vector>(n);
         _cols = std::vector<Vector>(m);
@@ -62,6 +91,14 @@ namespace math {
 
     std::tuple<size_t, size_t> Matrix::shape() const {
         return std::make_tuple(_n, _m);
+    }
+
+    size_t Matrix::n() const {
+        return _n;
+    }
+
+    size_t Matrix::m() const {
+        return _m;
     }
 
     const Vector &Matrix::operator[](size_t index) const {
@@ -174,6 +211,35 @@ namespace math {
         std::vector<Vector> new_data = std::vector<Vector>(_n);
         for (size_t i = 0; i < _n; i++) {
             new_data[i] = _rows[i] / other;
+        }
+        return {_n, _m, new_data};
+    }
+
+    Matrix Matrix::exp() const {
+        std::vector<Vector> new_data = std::vector<Vector>(_n);
+        for (size_t i = 0; i < _n; i++) {
+            new_data[i] = _rows[i].exp();
+        }
+        return {_n, _m, new_data};
+    }
+
+    Matrix Matrix::inv(const float other) {
+        std::vector<Vector> new_data = std::vector<Vector>(_n);
+        for (size_t i = 0; i < _n; i++) {
+            new_data[i] = _rows[i].inv(other);
+        }
+        return {_n, _m, new_data};
+    }
+
+    Matrix Matrix::had(const Matrix &other) const {
+        assert(shape() == other.shape() && "Matrices need to be of same shape for Hadamard-Product!");
+        std::vector<Vector> new_data = std::vector<Vector>(_n);
+        for (size_t i = 0; i < _n; i++) {
+            Vector v = Vector(_m);
+            for (size_t j = 0; j < _m; j++) {
+                v[j] = _rows[i][j] * other[i][j];
+            }
+            new_data[i] = v;
         }
         return {_n, _m, new_data};
     }
