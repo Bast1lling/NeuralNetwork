@@ -1,5 +1,5 @@
 # Declare the math library
-add_library(math vector.cpp)
+add_library(math vector.cpp matrix.cpp)
 
 # Include directories for this module
 target_include_directories(math PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

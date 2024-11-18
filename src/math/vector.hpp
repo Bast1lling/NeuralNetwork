@@ -3,11 +3,13 @@
 
 namespace math {
     class Vector {
-        const size_t _size{};
+        size_t _size{};
         std::vector<float> _data;
 
     public:
         // constructors
+        Vector();
+
         explicit Vector(size_t size);
 
         Vector(size_t size, float value);
@@ -30,9 +32,17 @@ namespace math {
 
         Vector operator-(const Vector &other) const;
 
-        Vector operator*(const Vector &other) const;
+        float operator*(const Vector &other) const;
 
-        Vector operator/(const Vector &other) const;
+        float operator/(const Vector &other) const;
+
+        Vector operator+(const float &other) const;
+
+        Vector operator-(const float &other) const;
+
+        Vector operator*(const float &other) const;
+
+        Vector operator/(const float &other) const;
 
         // relational operators
         bool operator==(const Vector &other) const;

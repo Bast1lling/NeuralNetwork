@@ -3,6 +3,8 @@
 #include <print>
 
 namespace math {
+    Vector::Vector() = default;
+
     Vector::Vector(const size_t size) : _size(size) {
         _data = std::vector<float>(size);
     }
@@ -58,20 +60,52 @@ namespace math {
         return Vector(new_data);
     }
 
-    Vector Vector::operator*(const Vector &other) const {
+    float Vector::operator*(const Vector &other) const {
         assert(_size == other._size && "Multiplying vectors of different size.");
+        float product = 0;
+        for (size_t i = 0; i < _size; i++) {
+            product += _data[i] * other._data[i];
+        }
+        return product;
+    }
+
+    float Vector::operator/(const Vector &other) const {
+        assert(_size == other._size && "Dividing vectors of different size.");
+        float product = 0;
+        for (size_t i = 0; i < _size; i++) {
+            product += _data[i] / other._data[i];
+        }
+        return product;
+    }
+
+    Vector Vector::operator+(const float &other) const {
         std::vector<float> new_data = std::vector<float>(_size);
         for (size_t i = 0; i < _size; i++) {
-            new_data[i] = _data[i] * other._data[i];
+            new_data[i] = _data[i] + other;
         }
         return Vector(new_data);
     }
 
-    Vector Vector::operator/(const Vector &other) const {
-        assert(_size == other._size && "Dividing vectors of different size.");
+    Vector Vector::operator-(const float &other) const {
         std::vector<float> new_data = std::vector<float>(_size);
         for (size_t i = 0; i < _size; i++) {
-            new_data[i] = _data[i] / other._data[i];
+            new_data[i] = _data[i] - other;
+        }
+        return Vector(new_data);
+    }
+
+    Vector Vector::operator*(const float &other) const {
+        std::vector<float> new_data = std::vector<float>(_size);
+        for (size_t i = 0; i < _size; i++) {
+            new_data[i] = _data[i] * other;
+        }
+        return Vector(new_data);
+    }
+
+    Vector Vector::operator/(const float &other) const {
+        std::vector<float> new_data = std::vector<float>(_size);
+        for (size_t i = 0; i < _size; i++) {
+            new_data[i] = _data[i] / other;
         }
         return Vector(new_data);
     }
