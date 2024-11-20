@@ -44,9 +44,13 @@ namespace math {
 
         Vector operator/(const float &other) const;
 
+        float sum() const;
+
         Vector exp() const;
 
-        Vector inv(float other = 1) const;
+        Vector inv(const float &other = 1) const;
+
+        Vector max(const float &other) const;
 
         // relational operators
         bool operator==(const Vector &other) const;

@@ -1,6 +1,7 @@
 #include "layer.hpp"
 
 namespace layer {
-    Layer::Layer(const size_t n) : _n(n) {
+    Layer::Layer(size_t batch_size, size_t input_size) : _batch_size(batch_size), _input_size(input_size), _cache(math::Matrix(batch_size, input_size)){
+
     }
 } // namespace layer

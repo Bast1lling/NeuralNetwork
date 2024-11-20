@@ -2,6 +2,7 @@
 #include "vector.hpp"
 #include <vector>
 #include <tuple>
+#include <random>
 
 namespace math {
     class Matrix {
@@ -14,13 +15,13 @@ namespace math {
         // constructors
         Matrix(std::initializer_list<std::initializer_list<float>> data);
 
-        explicit Matrix(const std::vector<std::vector<float>>& data);
+        explicit Matrix(const std::vector<std::vector<float>>& data); // init with rows
 
         Matrix(size_t n, size_t m);
 
         Matrix(size_t n, size_t m, float value);
 
-        Matrix(size_t n, size_t m, const std::vector<Vector> &data);
+        Matrix(size_t n, size_t m, const std::vector<Vector> &data); // init with rows
 
         Matrix(const std::vector<Vector> &rows, const std::vector<Vector> &cols);
 
@@ -36,6 +37,10 @@ namespace math {
 
         Vector &operator[](size_t index);
 
+        const Vector &get_col(size_t index) const;
+
+        Vector &get_col(size_t index);
+
         // arithmetic operators
         Matrix operator+() const;
 
@@ -45,13 +50,17 @@ namespace math {
 
         Matrix operator-(const Matrix &other) const;
 
-        Vector operator*(const Vector &other) const;
-
-        Vector operator/(const Vector &other) const;
-
         Matrix operator*(const Matrix &other) const;
 
         Matrix operator/(const Matrix &other) const;
+
+        Matrix operator+(const Vector &other) const;
+
+        Matrix operator-(const Vector &other) const;
+
+        Vector operator*(const Vector &other) const;
+
+        Vector operator/(const Vector &other) const;
 
         Matrix operator+(const float &other) const;
 
@@ -67,6 +76,8 @@ namespace math {
 
         Matrix had(const Matrix &other) const; // hadamard-product
 
+        Matrix max(const float &other) const;
+
         Matrix T() const;
 
         // relational operators
@@ -76,5 +87,7 @@ namespace math {
 
         // other
         void print() const;
+
+        static Matrix getRandom(size_t n, size_t m, float std);
     };
 } // namespace math

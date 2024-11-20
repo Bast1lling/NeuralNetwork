@@ -111,6 +111,14 @@ namespace math {
         return Vector(new_data);
     }
 
+    float Vector::sum() const {
+        float result = 0;
+        for (float x: _data) {
+            result += x;
+        }
+        return result;
+    }
+
     Vector Vector::exp() const {
         std::vector<float> new_data = std::vector<float>(_size);
         for (size_t i = 0; i < _size; i++) {
@@ -119,10 +127,18 @@ namespace math {
         return Vector(new_data);
     }
 
-    Vector Vector::inv(const float other) const {
+    Vector Vector::inv(const float &other) const {
         std::vector<float> new_data = std::vector<float>(_size);
         for (size_t i = 0; i < _size; i++) {
             new_data[i] = other / _data[i];
+        }
+        return Vector(new_data);
+    }
+
+    Vector Vector::max(const float &other) const {
+        std::vector<float> new_data = std::vector<float>(_size);
+        for (size_t i = 0; i < _size; i++) {
+            new_data[i] = std::max(_data[i], other);
         }
         return Vector(new_data);
     }

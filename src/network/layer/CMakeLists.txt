@@ -1,6 +1,8 @@
 # Declare the math library
 add_library(layer sigmoid.cpp
-        layer.cpp)
+        layer.cpp
+        relu.cpp
+        affine.cpp)
 
 # Include directories for this module
 target_include_directories(layer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
