@@ -46,7 +46,17 @@ namespace math {
 
         float sum() const;
 
+        float mean() const;
+
+        float max() const;
+
         Vector exp() const;
+
+        Vector log() const;
+
+        Vector pow(float exponent) const;
+
+        Vector abs() const;
 
         Vector inv(const float &other = 1) const;
 

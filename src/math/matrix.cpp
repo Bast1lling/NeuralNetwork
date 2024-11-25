@@ -32,6 +32,14 @@ namespace math {
         }
     }
 
+    Matrix::Matrix(const Vector &data) : _n(data.size()), _m(1) {
+        _rows = std::vector<Vector>(_n);
+        _cols = {data};
+        for (size_t i = 0; i < _n; i++) {
+            _rows[i] = Vector(1, data[i]);
+        }
+    }
+
     Matrix::Matrix(const size_t n, const size_t m) : _n(n), _m(m) {
         _rows = std::vector<Vector>(n);
         _cols = std::vector<Vector>(m);
@@ -247,10 +255,42 @@ namespace math {
         return {_n, _m, new_data};
     }
 
+    Vector Matrix::sum() const {
+        std::vector<float> new_data = std::vector<float>(_n);
+        for (size_t i = 0; i < _n; i++) {
+            new_data[i] = _rows[i].sum();
+        }
+        return Vector(new_data);
+    }
+
+    Vector Matrix::mean() const {
+        std::vector<float> new_data = std::vector<float>(_n);
+        for (size_t i = 0; i < _n; i++) {
+            new_data[i] = _rows[i].mean();
+        }
+        return Vector(new_data);
+    }
+
+    Matrix Matrix::pow(float exponent) const {
+        std::vector<Vector> new_data = std::vector<Vector>(_n);
+        for (size_t i = 0; i < _n; i++) {
+            new_data[i] = _rows[i].pow(exponent);
+        }
+        return {_n, _m, new_data};
+    }
+
     Matrix Matrix::exp() const {
         std::vector<Vector> new_data = std::vector<Vector>(_n);
         for (size_t i = 0; i < _n; i++) {
             new_data[i] = _rows[i].exp();
+        }
+        return {_n, _m, new_data};
+    }
+
+    Matrix Matrix::log() const {
+        std::vector<Vector> new_data = std::vector<Vector>(_n);
+        for (size_t i = 0; i < _n; i++) {
+            new_data[i] = _rows[i].log();
         }
         return {_n, _m, new_data};
     }
@@ -280,6 +320,14 @@ namespace math {
         std::vector<Vector> new_data = std::vector<Vector>(_n);
         for (size_t i = 0; i < _n; i++) {
             new_data[i] = _rows[i].max(other);
+        }
+        return {_n, _m, new_data};
+    }
+
+    Matrix Matrix::abs() const {
+        std::vector<Vector> new_data = std::vector<Vector>(_n);
+        for (size_t i = 0; i < _n; i++) {
+            new_data[i] = _rows[i].abs();
         }
         return {_n, _m, new_data};
     }

@@ -119,10 +119,48 @@ namespace math {
         return result;
     }
 
+    float Vector::mean() const {
+        return sum() / static_cast<float>(_size);
+    }
+
+    float Vector::max() const {
+        float max = std::numeric_limits<float>::lowest();
+        for (float f: _data) {
+            if (f > max) {
+                max = f;
+            }
+        }
+        return max;
+    }
+
+    Vector Vector::pow(float exponent) const {
+        std::vector<float> new_data = std::vector<float>(_size);
+        for (size_t i = 0; i < _size; i++) {
+            new_data[i] = std::pow(_data[i], exponent);
+        }
+        return Vector(new_data);
+    }
+
     Vector Vector::exp() const {
         std::vector<float> new_data = std::vector<float>(_size);
         for (size_t i = 0; i < _size; i++) {
             new_data[i] = std::exp(_data[i]);
+        }
+        return Vector(new_data);
+    }
+
+    Vector Vector::log() const {
+        std::vector<float> new_data = std::vector<float>(_size);
+        for (size_t i = 0; i < _size; i++) {
+            new_data[i] = std::log(_data[i]);
+        }
+        return Vector(new_data);
+    }
+
+    Vector Vector::abs() const {
+        std::vector<float> new_data = std::vector<float>(_size);
+        for (size_t i = 0; i < _size; i++) {
+            new_data[i] = std::abs(_data[i]);
         }
         return Vector(new_data);
     }

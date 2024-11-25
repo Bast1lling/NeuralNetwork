@@ -17,6 +17,8 @@ namespace math {
 
         explicit Matrix(const std::vector<std::vector<float>>& data); // init with rows
 
+        explicit Matrix(const Vector& data);
+
         Matrix(size_t n, size_t m);
 
         Matrix(size_t n, size_t m, float value);
@@ -70,7 +72,17 @@ namespace math {
 
         Matrix operator/(const float &other) const;
 
+        Matrix pow(float exponent) const;
+
         Matrix exp() const;
+
+        Matrix log() const;
+
+        Matrix abs() const;
+
+        Vector sum() const; // row-wise sum
+
+        Vector mean() const;
 
         Matrix inv(float other = 1);
 
