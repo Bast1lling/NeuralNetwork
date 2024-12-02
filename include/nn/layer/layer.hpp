@@ -1,5 +1,5 @@
 #pragma once
-#include "../../math/matrix.hpp"
+#include <nn/math/matrix.hpp>
 
 namespace layer {
     class Layer { // abstract class representing a single network layer

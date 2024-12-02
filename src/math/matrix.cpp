@@ -1,4 +1,4 @@
-#include "matrix.hpp"
+#include <nn/math/matrix.hpp>
 #include <cassert>
 #include <print>
 namespace {

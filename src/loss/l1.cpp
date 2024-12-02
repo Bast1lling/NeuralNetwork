@@ -1,4 +1,4 @@
-#include "l1.hpp"
+#include <nn/loss/l1.hpp>
 
 namespace loss {
     L1::L1(math::Matrix &&y_truth) : Loss(y_truth){

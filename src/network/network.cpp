@@ -1,6 +1,6 @@
-#include "network.hpp"
+#include <nn/network/network.hpp>
 
-#include <matrix.hpp>
+/*#include "matrix.hpp"
 #include <vector>
 
 namespace network {
@@ -11,4 +11,4 @@ namespace network {
         virtual math::Matrix forward(math::Matrix input);
         virtual math::Matrix backward(math::Matrix output);
     };
-} // namespace network
+} // namespace network*/

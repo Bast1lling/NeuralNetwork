@@ -1,5 +1,5 @@
 #pragma once
-#include <layer.hpp>
+#include <nn/layer/layer.hpp>
 
 namespace layer {
     class Affine final : public Layer {

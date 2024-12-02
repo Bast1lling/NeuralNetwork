@@ -1,4 +1,4 @@
-#include "cross_entropy_loss.hpp"
+#include <nn/loss/cross_entropy_loss.hpp>
 
 namespace loss {
     CrossEntropy::CrossEntropy(const std::vector<size_t> &labels, size_t num_classes) : Loss(math::Matrix(1, 1)), cache(math::Matrix(labels.size(), num_classes)){
@@ -16,8 +16,8 @@ namespace loss {
         for (size_t i = 0; i < y_out.n(); i++) {
             const math::Vector& row = y_out[i];
             float max = row.max();
-            float mean = row.mean();
-            soft_maxed_data[i] = ((row - max) / mean);
+            math::Vector temp = (row - max).exp();
+            soft_maxed_data[i] = temp / temp.sum();
         }
         cache = math::Matrix(y_out.n(), y_out.m(), soft_maxed_data);
         return (-y_truth.had(cache.log())).sum().mean();

@@ -1,5 +1,5 @@
 #pragma once
-#include <loss.hpp>
+#include <nn/loss/loss.hpp>
 
 namespace loss {
     class L2 final : public Loss {

@@ -1,16 +1,16 @@
 //
 // Created by sebas on 17.11.2024.
 //
-#include <affine.hpp>
-#include <cross_entropy_loss.hpp>
-#include <l1.hpp>
-#include <l2.hpp>
-#include <matrix.hpp>
+#include <nn/math/matrix.hpp>
+#include <nn/math/vector.hpp>
+#include <nn/layer/affine.hpp>
+#include <nn/layer/relu.hpp>
+#include <nn/layer/sigmoid.hpp>
+#include <nn/loss/cross_entropy_loss.hpp>
+#include <nn/loss/l1.hpp>
+#include <nn/loss/l2.hpp>
 #include <numbers>
 #include<print>
-#include <relu.hpp>
-#include <sigmoid.hpp>
-#include<vector.hpp>
 using namespace math;
 
 Matrix get_input() {

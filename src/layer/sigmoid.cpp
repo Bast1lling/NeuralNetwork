@@ -1,4 +1,4 @@
-#include "sigmoid.hpp"
+#include <nn/layer/sigmoid.hpp>
 
 namespace layer {
     Sigmoid::Sigmoid(const size_t batch_size, const size_t input_size) : Layer(batch_size, input_size) {

@@ -1,5 +1,5 @@
 #pragma once
-#include "vector.hpp"
+#include <nn/math/vector.hpp>
 #include <vector>
 #include <tuple>
 #include <random>

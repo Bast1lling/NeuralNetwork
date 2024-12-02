@@ -1,5 +1,4 @@
-#include "affine.hpp"
-
+#include <nn/layer/affine.hpp>
 #include <print>
 
 namespace layer {

@@ -1,4 +1,4 @@
-#include "loss.hpp"
+#include <nn/loss/loss.hpp>
 
 #include <utility>
 

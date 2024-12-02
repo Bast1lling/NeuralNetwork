@@ -1,4 +1,4 @@
-#include "vector.hpp"
+#include <nn/math/vector.hpp>
 #include <cassert>
 #include <cmath>
 #include <print>

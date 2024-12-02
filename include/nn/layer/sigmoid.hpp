@@ -1,10 +1,10 @@
 #pragma once
-#include <layer.hpp>
+#include <nn/layer/layer.hpp>
 
 namespace layer {
-    class ReLu final : public Layer {
+    class Sigmoid final : public Layer {
     public:
-        ReLu(size_t batch_size, size_t input_size);
+        Sigmoid(size_t batch_size, size_t input_size);
         math::Matrix* forward(math::Matrix &&in) override;
         math::Matrix backward(math::Matrix &&dout) override;
     };

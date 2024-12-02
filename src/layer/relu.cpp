@@ -1,4 +1,4 @@
-#include "relu.hpp"
+#include <nn/layer/relu.hpp>
 
 namespace layer {
     ReLu::ReLu(const size_t batch_size, const size_t input_size) : Layer(batch_size, input_size) {
