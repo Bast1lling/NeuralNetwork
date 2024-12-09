@@ -36,7 +36,7 @@ namespace network {
         const math::Matrix &y_out = forward(X);
         auto [fst, snd] = loss_function(y_out, y);
         const auto grads = backward(std::move(snd));
-        optimizer(grads, weights, optimizer::OptimizerParameters());
+        optimizer(grads, weights);
         return fst;
     }
 } // namespace network

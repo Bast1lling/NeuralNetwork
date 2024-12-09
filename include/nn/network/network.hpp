@@ -1,10 +1,11 @@
 #pragma once
-#include <functional>
 #include <memory>
 #include <vector>
 #include <nn/layer/layer.hpp>
 #include <nn/loss/loss.hpp>
 #include <nn/optimizer/optimizer.hpp>
+
+#include "nn/optimizer/sgd.hpp"
 
 namespace network {
     class Network {
@@ -17,7 +18,7 @@ namespace network {
     public:
         std::vector<std::unique_ptr<layer::Layer> > model;
         loss::LossFunction loss_function = loss::cross_entropy;
-        optimizer::Optimizer optimizer = optimizer::sgd_step;
+        auto optimizer = std::make_unique<optimizer::Optimizer>(optimizer::StochasticGradientDescent());
 
         Network(size_t batch_size, size_t input_size, size_t output_size)();
 

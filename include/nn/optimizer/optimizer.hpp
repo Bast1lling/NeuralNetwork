@@ -2,9 +2,12 @@
 #include <nn/math/matrix.hpp>
 
 namespace optimizer {
-    class OptimizerParameters {
-
+    class Optimizer {
+    protected:
+        Optimizer() = default;
+    public:
+        virtual ~Optimizer() = default;
+        virtual void operator()(const std::vector<const math::Matrix &>&grads, const std::vector<math::Matrix *>& weights) = 0;
+        virtual void reset() = 0;
     };
-    using Optimizer = void(std::vector<const math::Matrix &>, std::vector<math::Matrix *>, OptimizerParameters);
-    void sgd_step(std::vector<const math::Matrix &>grads, std::vector<math::Matrix *> weights, OptimizerParameters params);
 } // namespace optimizer

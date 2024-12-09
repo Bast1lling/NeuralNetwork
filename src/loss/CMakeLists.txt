@@ -1,8 +1,5 @@
 add_library(loss
         loss.cpp
-        l1.cpp
-        l2.cpp
-        cross_entropy_loss.cpp
 )
 
 target_include_directories(loss PUBLIC ../../include)

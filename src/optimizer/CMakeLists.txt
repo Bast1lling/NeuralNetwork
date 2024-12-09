@@ -1,5 +1,4 @@
-add_library(optimizer sgd.cpp
-        optimizer.cpp)
+add_library(optimizer sgd.cpp)
 
 target_include_directories(optimizer PUBLIC ../../include)
 target_link_libraries(optimizer PRIVATE math )
