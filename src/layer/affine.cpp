@@ -17,21 +17,23 @@ namespace layer {
                                                                _d_weights(weights.n(), weights.m()), _d_b(weights.m()) {
     }
 
-    math::Matrix *Affine::weights() {
-        return &_weights;
-    }
-
     size_t Affine::output_size() const {
         return _output_size;
     }
 
-    math::Matrix *Affine::forward(math::Matrix &&in) {
+    const math::Matrix &Affine::forward(math::Matrix &&in) {
         _in_cache = in;
         _cache = _in_cache * _weights + _b;
-        return &_cache;
+        return _cache;
     }
 
-    math::Matrix Affine::backward(math::Matrix &&dout) {
+    const math::Matrix &Affine::forward(const math::Matrix &in) {
+        _in_cache = in;
+        _cache = _in_cache * _weights + _b;
+        return _cache;
+    }
+
+    const math::Matrix &Affine::backward(math::Matrix &&dout) {
         _d_weights = _in_cache.T() * dout;
         // d_b => sum_up all rows of dout individually
         std::vector<float> d_b_data = std::vector<float>(_b.size());
@@ -39,7 +41,25 @@ namespace layer {
             d_b_data[i] = dout.get_col(i).sum();
         }
         _d_b = math::Vector(d_b_data);
-        return dout * _weights.T();
+        _grad = dout * _weights.T();
+        return _grad;
+    }
+
+    const math::Matrix &Affine::backward(const math::Matrix &dout) {
+        _d_weights = _in_cache.T() * dout;
+        // d_b => sum_up all rows of dout individually
+        std::vector<float> d_b_data = std::vector<float>(_b.size());
+        for (size_t i = 0; i < _b.size(); i++) {
+            d_b_data[i] = dout.get_col(i).sum();
+        }
+        _d_b = math::Vector(d_b_data);
+        _grad = dout * _weights.T();
+        return _grad;
+    }
+
+    math::Matrix * Affine::weights() {
+        // TODO: add bias into weights
+        return &_weights;
     }
 
     void Affine::print() const {

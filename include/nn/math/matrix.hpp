@@ -8,8 +8,8 @@ namespace math {
     class Matrix {
         std::vector<Vector> _rows;
         std::vector<Vector> _cols;
-        size_t _n;
-        size_t _m;
+        size_t _n = 0;
+        size_t _m = 0;
 
     public:
         // constructors
@@ -26,6 +26,8 @@ namespace math {
         Matrix(size_t n, size_t m, const std::vector<Vector> &data); // init with rows
 
         Matrix(const std::vector<Vector> &rows, const std::vector<Vector> &cols);
+
+        Matrix() = default;
 
         // getter
         std::tuple<size_t, size_t> shape() const;

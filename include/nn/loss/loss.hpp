@@ -1,16 +1,10 @@
 #pragma once
+#include <memory>
 #include <nn/math/matrix.hpp>
 
 namespace loss {
-    class Loss {
-    protected:
-        math::Matrix y_truth{};
-        explicit Loss(math::Matrix y_truth);
-        Loss();
-    public:
-        virtual ~Loss() = default;
-
-        virtual float forward(const math::Matrix &y_out) = 0;
-        virtual math::Matrix backward(const math::Matrix &y_out) = 0;
-    };
+    using LossFunction = std::pair<float, math::Matrix>(const math::Matrix&, const math::Matrix&);
+    std::pair<float, math::Matrix> l1(const math::Matrix&, const math::Matrix&);
+    std::pair<float, math::Matrix> l2(const math::Matrix&, const math::Matrix&);
+    std::pair<float, math::Matrix> cross_entropy(const math::Matrix&, const math::Matrix&);
 } // namespace loss

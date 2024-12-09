@@ -2,13 +2,9 @@
 #include <nn/math/matrix.hpp>
 
 namespace optimizer {
-    /*class Optimizer {
-    protected:
-        math::Matrix y_truth{};
-    public:
-        virtual ~Loss() = default;
+    class OptimizerParameters {
 
-        virtual float forward(const math::Matrix &y_out) = 0;
-        virtual math::Matrix backward(const math::Matrix &y_out) = 0;
-    };*/
+    };
+    using Optimizer = void(std::vector<const math::Matrix &>, std::vector<math::Matrix *>, OptimizerParameters);
+    void sgd_step(std::vector<const math::Matrix &>grads, std::vector<math::Matrix *> weights, OptimizerParameters params);
 } // namespace optimizer

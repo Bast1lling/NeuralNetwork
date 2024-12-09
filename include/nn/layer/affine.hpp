@@ -15,12 +15,18 @@ namespace layer {
         Affine(size_t batch_size, size_t input_size, size_t output_size);
         Affine(math::Matrix &&weights, math::Vector &&b);
         // Getters
-        math::Matrix* weights();
         size_t output_size() const;
 
         // Virtual
-        math::Matrix* forward(math::Matrix &&in) override;
-        math::Matrix backward(math::Matrix &&dout) override;
+        const math::Matrix &forward(math::Matrix &&in) override;
+
+        const math::Matrix &forward(const math::Matrix &in) override;
+
+        const math::Matrix &backward(math::Matrix &&dout) override;
+
+        const math::Matrix &backward(const math::Matrix &dout) override;
+
+        math::Matrix *weights() override;
 
         // Others
         void print() const;
