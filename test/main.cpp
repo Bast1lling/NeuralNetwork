@@ -6,7 +6,7 @@
 #include <nn/layer/affine.hpp>
 #include <nn/layer/relu.hpp>
 #include <nn/layer/sigmoid.hpp>
-//#include <nn/loss/loss.hpp>
+#include <nn/loss/loss.hpp>
 #include <numbers>
 #include<print>
 using namespace math;
@@ -330,7 +330,6 @@ void affine_test() {
     dx.print();
     affine.print();
 }
-/*
 void l1_test() {
     Matrix y_out = {
         {0.00000000, 0.25000000, 0.50000000, 0.75000000, 1.00000000},
@@ -354,9 +353,8 @@ void l1_test() {
         {0.00000000, 1.00000000, 1.00000000, -1.00000000, 1.00000000},
         {0.00000000, 1.00000000, 1.00000000, 1.00000000, 0.00000000},
     };
-    loss::LossFunction loss_function = loss::l1;
-    auto results = loss_function(y_out, y_truth);
-    std::print("{}", results.first);
+    auto results = loss::l1(y_out, y_truth);
+    std::println("{}", results.first);
     results.second.print();
 }
 
@@ -385,7 +383,7 @@ void l2_test() {
     };
     loss::LossFunction loss_function = loss::l2;
     auto results = loss_function(y_out, y_truth);
-    std::print("{}", results.first);
+    std::println("{}", results.first);
     results.second.print();
 
 }
@@ -416,15 +414,15 @@ void cross_entropy_test() {
     };
     loss::LossFunction loss_function = loss::cross_entropy;
     auto results = loss_function(y_out, y_truth);
-    std::print("{}", results.first);
+    std::println("{}", results.first);
     results.second.print();
 }
-*/
+
 int main() {
     // sigmoid_test();
     // relu_test();
-    affine_test();
+    // affine_test();
     // l1_test();
     // l2_test();
-    // cross_entropy_test();
+    cross_entropy_test();
 }

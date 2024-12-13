@@ -1,6 +1,4 @@
-add_library(loss
-        loss.cpp
-)
+add_library(loss loss.cpp)
 
 target_include_directories(loss PUBLIC ../../include)
 target_link_libraries(loss PRIVATE math)

@@ -41,8 +41,8 @@ namespace math {
     }
 
     Matrix::Matrix(const size_t n, const size_t m) : _n(n), _m(m) {
-        _rows = std::vector<Vector>(n);
-        _cols = std::vector<Vector>(m);
+        _rows = std::vector<Vector>(0);
+        _cols = std::vector<Vector>(0);
         for (size_t i = 0; i < std::max(n, m); i++) {
             if (i < n) {
                 _rows.emplace_back(m);
@@ -385,7 +385,8 @@ namespace math {
     Matrix fromLabels(const std::vector<size_t> &labels, size_t num_classes) {
         Matrix one_hot_encodings = Matrix(labels.size(), num_classes);
         for (size_t i = 0; i < labels.size(); ++i) {
-            one_hot_encodings[i][labels[i]] = 1;
+            size_t j = labels[i];
+            one_hot_encodings[i][j] = 1;
         }
         return one_hot_encodings;
     }

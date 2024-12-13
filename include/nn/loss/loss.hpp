@@ -1,6 +1,6 @@
 #pragma once
-#include <memory>
 #include <nn/math/matrix.hpp>
+#include <memory>
 
 namespace loss {
     using LossFunction = std::pair<float, math::Matrix>(*)(const math::Matrix&, const math::Matrix&);
