@@ -5,30 +5,33 @@
 
 namespace network {
     Network::Network(size_t batch_size, size_t input_size, size_t output_size) : weights(0){
-        model.reserve(2);
+        model = std::make_unique<layer::Affine>(layer::Affine(batch_size, input_size, output_size));
+        /*model.reserve(2);
+        model= {};
         model = {
-            std::make_unique<layer::Layer>(layer::Affine(batch_size, input_size, output_size)),
-            std::make_unique<layer::Layer>(layer::ReLu(batch_size, output_size))
+            std::make_unique<layer::Affine>(layer::Affine(batch_size, input_size, output_size)),
+            std::make_unique<layer::ReLu>(layer::ReLu(batch_size, output_size))
         };
         weights.reserve(model.size());
         for (const auto layer: model) {
             weights.emplace_back(layer->weights());
-        }
+        }*/
+        optimizer = std::make_unique<optimizer::StochasticGradientDescent>();
     }
 
-    const math::Matrix &Network::forward(const math::Matrix &in) {
+    math::Matrix Network::forward(const math::Matrix &in) {
         auto input = in;
-        for (const std::unique_ptr<layer::Layer> layer: model) {
+        /*for (const auto layer: model) {
             input = layer->forward(input);
-        }
+        }*/
         return input;
     }
 
-    std::vector<const math::Matrix &> Network::backward(math::Matrix &&dloss) {
-        std::vector<const math::Matrix &> result = {dloss};
-        for (auto & it : std::ranges::reverse_view(model)) {
-            result.emplace_back(it->backward(result[result.size() - 1]));
-        }
+    std::vector<const math::Matrix *> Network::backward(math::Matrix &&dloss) {
+        std::vector<const math::Matrix *> result = {&dloss};
+        /*for (const auto it : std::ranges::reverse_view(model)) {
+            result.emplace_back(&(it->backward(*result[result.size() - 1])));
+        }*/
         return result;
     }
 
@@ -36,7 +39,7 @@ namespace network {
         const math::Matrix &y_out = forward(X);
         auto [fst, snd] = loss_function(y_out, y);
         const auto grads = backward(std::move(snd));
-        optimizer(grads, weights);
+        (*optimizer)(grads, weights);
         return fst;
     }
 } // namespace network

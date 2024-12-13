@@ -104,4 +104,6 @@ namespace math {
 
         static Matrix getRandom(size_t n, size_t m, float std);
     };
+
+    Matrix fromLabels(const std::vector<size_t> &labels, size_t num_classes);
 } // namespace math

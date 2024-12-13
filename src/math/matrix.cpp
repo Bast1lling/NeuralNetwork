@@ -381,4 +381,12 @@ namespace math {
         }
         return Matrix(data);
     }
+
+    Matrix fromLabels(const std::vector<size_t> &labels, size_t num_classes) {
+        Matrix one_hot_encodings = Matrix(labels.size(), num_classes);
+        for (size_t i = 0; i < labels.size(); ++i) {
+            one_hot_encodings[i][labels[i]] = 1;
+        }
+        return one_hot_encodings;
+    }
 } // namespace math

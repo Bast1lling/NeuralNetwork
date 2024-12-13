@@ -7,7 +7,7 @@ namespace optimizer {
         Optimizer() = default;
     public:
         virtual ~Optimizer() = default;
-        virtual void operator()(const std::vector<const math::Matrix &>&grads, const std::vector<math::Matrix *>& weights) = 0;
+        virtual void operator()(const std::vector<const math::Matrix *>&grads, const std::vector<math::Matrix *>& weights) = 0;
         virtual void reset() = 0;
     };
 } // namespace optimizer

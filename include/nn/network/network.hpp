@@ -11,16 +11,16 @@ namespace network {
     class Network {
         std::vector<math::Matrix *> weights;
         // process model input and return the generated output
-        const math::Matrix &forward(const math::Matrix &in);
+        math::Matrix forward(const math::Matrix &in);
         // compute layer-wise gradients according to loss function gradient
-        std::vector<const math::Matrix &> backward(math::Matrix &&dloss);
+        std::vector<const math::Matrix *> backward(math::Matrix &&dloss);
 
     public:
-        std::vector<std::unique_ptr<layer::Layer> > model;
+        std::unique_ptr<layer::Layer> model;
         loss::LossFunction loss_function = loss::cross_entropy;
-        auto optimizer = std::make_unique<optimizer::Optimizer>(optimizer::StochasticGradientDescent());
+        std::unique_ptr<optimizer::Optimizer> optimizer;
 
-        Network(size_t batch_size, size_t input_size, size_t output_size)();
+        Network(size_t batch_size, size_t input_size, size_t output_size);
 
         // train a single batch and return loss and accuracy
         float train(const math::Matrix &X, const math::Matrix &y);

@@ -9,7 +9,7 @@ namespace optimizer {
 
     public:
         StochasticGradientDescent() = default;
-        void operator()(const std::vector<const math::Matrix &>&grads, const std::vector<math::Matrix *>& weights) override;
+        void operator()(const std::vector<const math::Matrix *>&grads, const std::vector<math::Matrix *>& weights) override;
         void reset() override {
             velocities = std::vector<math::Matrix>();
         }

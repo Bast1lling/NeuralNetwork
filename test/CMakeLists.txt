@@ -1,5 +1,4 @@
-add_executable(test main.cpp
-        ../include/nn/optimizer/sgd.hpp)
+add_executable(test main.cpp)
 
 target_link_libraries(test PRIVATE layer loss math network optimizer)
 
