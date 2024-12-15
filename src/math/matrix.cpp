@@ -42,7 +42,9 @@ namespace math {
 
     Matrix::Matrix(const size_t n, const size_t m) : _n(n), _m(m) {
         _rows = std::vector<Vector>(0);
+        _rows.reserve(n);
         _cols = std::vector<Vector>(0);
+        _cols.reserve(m);
         for (size_t i = 0; i < std::max(n, m); i++) {
             if (i < n) {
                 _rows.emplace_back(m);

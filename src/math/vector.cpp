@@ -6,28 +6,28 @@
 namespace math {
     Vector::Vector() = default;
 
-    Vector::Vector(const size_t size) : _size(size) {
+    Vector::Vector(const size_t size) {
         _data = std::vector<float>(size);
     }
 
-    Vector::Vector(const size_t size, const float value) : _size(size) {
+    Vector::Vector(const size_t size, const float value) {
         _data = std::vector(size, value);
     }
 
-    Vector::Vector(const std::vector<float>& data) : _size(data.size()), _data(data) {
+    Vector::Vector(const std::vector<float>& data) : _data(data) {
     }
 
     size_t Vector::size() const {
-        return _size;
+        return _data.size();
     }
 
     const float &Vector::operator[](const size_t index) const {
-        assert(index < _size && "Accessing element outside of vector");
+        assert(index < _data.size() && "Accessing element outside of vector");
         return _data[index];
     }
 
     float &Vector::operator[](const size_t index) {
-        assert(index < _size && "Accessing element outside of vector");
+        assert(index < _data.size() && "Accessing element outside of vector");
         return _data[index];
     }
 
@@ -36,76 +36,76 @@ namespace math {
     }
 
     Vector Vector::operator-() const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = -_data[i];
         }
         return Vector(new_data);
     }
 
     Vector Vector::operator+(const Vector &other) const {
-        assert(_size == other._size && "Adding vectors of different size.");
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        assert(_data.size() == other._data.size() && "Adding vectors of different size.");
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = _data[i] + other._data[i];
         }
         return Vector(new_data);
     }
 
     Vector Vector::operator-(const Vector &other) const {
-        assert(_size == other._size && "Subtracting vectors of different size.");
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        assert(_data.size() == other._data.size() && "Subtracting vectors of different size.");
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = _data[i] - other._data[i];
         }
         return Vector(new_data);
     }
 
     float Vector::operator*(const Vector &other) const {
-        assert(_size == other._size && "Multiplying vectors of different size.");
+        assert(_data.size() == other._data.size() && "Multiplying vectors of different size.");
         float product = 0;
-        for (size_t i = 0; i < _size; i++) {
+        for (size_t i = 0; i < _data.size(); i++) {
             product += _data[i] * other._data[i];
         }
         return product;
     }
 
     float Vector::operator/(const Vector &other) const {
-        assert(_size == other._size && "Dividing vectors of different size.");
+        assert(_data.size() == other._data.size() && "Dividing vectors of different size.");
         float product = 0;
-        for (size_t i = 0; i < _size; i++) {
+        for (size_t i = 0; i < _data.size(); i++) {
             product += _data[i] / other._data[i];
         }
         return product;
     }
 
     Vector Vector::operator+(const float &other) const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = _data[i] + other;
         }
         return Vector(new_data);
     }
 
     Vector Vector::operator-(const float &other) const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = _data[i] - other;
         }
         return Vector(new_data);
     }
 
     Vector Vector::operator*(const float &other) const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = _data[i] * other;
         }
         return Vector(new_data);
     }
 
     Vector Vector::operator/(const float &other) const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = _data[i] / other;
         }
         return Vector(new_data);
@@ -120,7 +120,7 @@ namespace math {
     }
 
     float Vector::mean() const {
-        return sum() / static_cast<float>(_size);
+        return sum() / static_cast<float>(_data.size());
     }
 
     float Vector::max() const {
@@ -134,56 +134,56 @@ namespace math {
     }
 
     Vector Vector::pow(float exponent) const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = std::pow(_data[i], exponent);
         }
         return Vector(new_data);
     }
 
     Vector Vector::exp() const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = std::exp(_data[i]);
         }
         return Vector(new_data);
     }
 
     Vector Vector::log() const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = std::log(_data[i]);
         }
         return Vector(new_data);
     }
 
     Vector Vector::abs() const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = std::abs(_data[i]);
         }
         return Vector(new_data);
     }
 
     Vector Vector::inv(const float &other) const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = other / _data[i];
         }
         return Vector(new_data);
     }
 
     Vector Vector::max(const float &other) const {
-        std::vector<float> new_data = std::vector<float>(_size);
-        for (size_t i = 0; i < _size; i++) {
+        std::vector<float> new_data = std::vector<float>(_data.size());
+        for (size_t i = 0; i < _data.size(); i++) {
             new_data[i] = std::max(_data[i], other);
         }
         return Vector(new_data);
     }
 
     bool Vector::operator==(const Vector &other) const {
-        assert(_size == other._size && "Comparing vectors of different size.");
-        for (size_t i = 0; i < _size; i++) {
+        assert(_data.size() == other._data.size() && "Comparing vectors of different size.");
+        for (size_t i = 0; i < _data.size(); i++) {
             if (_data[i] != other._data[i]) {
                 return false;
             }
@@ -197,9 +197,9 @@ namespace math {
 
     void Vector::print() const {
         std::print("[");
-        for (size_t i = 0; i < _size - 1; i++) {
+        for (size_t i = 0; i < _data.size() - 1; i++) {
             std::print("{}, ", _data[i]);
         }
-        std::println("{}]", _data[_size - 1]);
+        std::println("{}]", _data[_data.size() - 1]);
     }
 } // namespace math

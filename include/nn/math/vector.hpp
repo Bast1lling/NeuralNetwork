@@ -3,7 +3,6 @@
 
 namespace math {
     class Vector {
-        size_t _size{};
         std::vector<float> _data;
 
     public:

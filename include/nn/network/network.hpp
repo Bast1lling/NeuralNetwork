@@ -16,7 +16,7 @@ namespace network {
         std::vector<const math::Matrix *> backward(math::Matrix &&dloss);
 
     public:
-        std::unique_ptr<layer::Layer> model;
+        std::vector<std::unique_ptr<layer::Layer>> model;
         loss::LossFunction loss_function = loss::cross_entropy;
         std::unique_ptr<optimizer::Optimizer> optimizer;
 

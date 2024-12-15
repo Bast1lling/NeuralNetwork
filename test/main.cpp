@@ -7,6 +7,7 @@
 #include <nn/layer/relu.hpp>
 #include <nn/layer/sigmoid.hpp>
 #include <nn/loss/loss.hpp>
+#include <nn/network/network.hpp>
 #include <numbers>
 #include<print>
 using namespace math;
@@ -418,11 +419,21 @@ void cross_entropy_test() {
     results.second.print();
 }
 
+void network_test() {
+    network::Network network = network::Network(32, 128, 10);
+    //network.train();
+    for (const auto &layer: network.model) {
+        if (layer->weights())
+            layer->weights()->print();
+    }
+}
+
 int main() {
     // sigmoid_test();
     // relu_test();
     // affine_test();
     // l1_test();
     // l2_test();
-    cross_entropy_test();
+    // cross_entropy_test();
+    network_test();
 }
